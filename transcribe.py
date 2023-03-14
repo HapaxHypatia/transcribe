@@ -4,10 +4,6 @@ import tempfile
 import shutil
 import time
 
-# import sys
-# sys.path.insert(0, "C:\\projects\\.dependencies\\")
-# sys.path.insert(0, "C:\\projects\\.resources\\")
-
 filetypes = (
 	"cda",
 	"mp3",
@@ -17,8 +13,7 @@ filetypes = (
 start = time.time()
 print ("Loading model, please wait...")
 model = whisper.load_model("medium")
-end = time.time()
-print("Model loaded in " + str(round((end-start)/60)) +' seconds.')
+print("Model loaded in " + str(round(time.time()-start)) +' seconds.')
 
 
 def transcribeFile(filename, outpath):
@@ -32,7 +27,7 @@ def transcribeFile(filename, outpath):
 			outfile.write(filename+'\n')
 			outfile.write(transcription['text'])
 			end = (time.time()-start)/60
-			print("File transcribed in " + str(end))
+			print("File transcribed in " + str(round(end-start)) )
 
 DIR = input('Paste directory path here: ')
 os.mkdir(DIR + '//Transcriptions')
