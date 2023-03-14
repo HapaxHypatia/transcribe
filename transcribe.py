@@ -43,7 +43,7 @@ for subdir, dirs, files in os.walk(DIR):
 		continue
 	for f in files:
 		if f.lower().endswith(filetypes):
-			outpath = DIR +"Transcriptions\\"+ f[:-4] + ".txt"
+			outpath = DIR +"\\Transcriptions\\"+ f[:-4] + ".txt"
 			if not os.path.isfile(outpath):
 				transcribeFile(os.path.join(DIR, subdir, f), outpath)
 
