@@ -4,9 +4,9 @@ import tempfile
 import shutil
 import time
 
-import sys
-sys.path.insert(0, "C:\\projects\\.dependencies\\")
-sys.path.insert(0, "C:\\projects\\.resources\\")
+# import sys
+# sys.path.insert(0, "C:\\projects\\.dependencies\\")
+# sys.path.insert(0, "C:\\projects\\.resources\\")
 
 filetypes = (
 	"cda",
@@ -18,7 +18,7 @@ start = time.time()
 print ("Loading model, please wait...")
 model = whisper.load_model("medium")
 end = time.time()
-print("Model loaded in " + str(round((end-start)/60)) +'seconds.')
+print("Model loaded in " + str(round((end-start)/60)) +' seconds.')
 
 
 def transcribeFile(filename, outpath):
@@ -26,7 +26,7 @@ def transcribeFile(filename, outpath):
 	start = time.time()
 	transcription = model.transcribe(filename, language="fr", fp16=False)
 	textlength = len(transcription["text"].split(' '))
-	if textlength>5:
+	if textlength>5:	#Dump any transcriptions of only a few words
 		print("Writing transcription of " +filename )
 		with open(outpath, 'a', encoding='utf-8') as outfile:
 			outfile.write(filename+'\n')
