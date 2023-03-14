@@ -35,6 +35,7 @@ def transcribeFile(filename, outpath):
 			print("File transcribed in " + str(end))
 
 DIR = input('Paste directory path here: ')
+os.mkdir(DIR + '//Transcriptions')
 
 # Walk through all files in DIR including in subdirectories
 # Find audio files and transcribe them, save resulting text file to Transcriptions folder
@@ -43,7 +44,7 @@ for subdir, dirs, files in os.walk(DIR):
 		continue
 	for f in files:
 		if f.lower().endswith(filetypes):
-			outpath = DIR +"\\Transcriptions\\"+ f[:-4] + ".txt"
+			outpath = DIR + '//Transcriptions' + f[:-4] + ".txt"
 			if not os.path.isfile(outpath):
 				transcribeFile(os.path.join(DIR, subdir, f), outpath)
 
