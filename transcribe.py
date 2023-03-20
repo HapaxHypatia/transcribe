@@ -26,8 +26,7 @@ def transcribeFile(filename, outpath):
 		with open(outpath, 'a', encoding='utf-8') as outfile:
 			outfile.write(filename+'\n')
 			outfile.write(transcription['text'])
-			end = (time.time()-start)/60
-			print("File transcribed in " + str(round(end-start)) )
+			print("File transcribed in " + str(round(time.time()-start)) +' seconds')
 
 DIR = input('Paste directory path here: ')
 os.mkdir(DIR + '//Transcriptions')
@@ -39,7 +38,7 @@ for subdir, dirs, files in os.walk(DIR):
 		continue
 	for f in files:
 		if f.lower().endswith(filetypes):
-			outpath = DIR + '//Transcriptions' + f[:-4] + ".txt"
+			outpath = DIR + '//Transcriptions//' + f[:-4] + ".txt"
 			if not os.path.isfile(outpath):
 				transcribeFile(os.path.join(DIR, subdir, f), outpath)
 
