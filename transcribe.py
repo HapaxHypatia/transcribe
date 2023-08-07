@@ -41,7 +41,7 @@ def transcribeFile(filename, destDIR):
 		log = open('logs.txt', 'a', encoding='utf-8')
 		log.write(name)
 		log.write("\n\n")
-		log.write("Size: {}mb.".format(file_stats.st_size / (1024 * 1024)))
+		log.write("Size: {} bytes.".format(round(file_stats.st_size,2)))
 		log.write("\n\n")
 		print("Writing transcription of " +name )
 		#Create transcriptions folder in specified directory
@@ -49,8 +49,11 @@ def transcribeFile(filename, destDIR):
 		with open(outpath, 'a', encoding='utf-8') as outfile:
 			outfile.write(name+'\n')
 			outfile.write(transcription['text'])
-			log.write("File transcribed in " + str(round(time.time()-start)) +' seconds')
+			duration = round(time.time()-start)
+			log.write("File transcribed in {} seconds".format(duration))
 			log.write("\n\n")
+			speed = file_stats.st_size/duration
+			log.write("Transcription speed = {} bytes per second\n\n".format(round(speed, 2)))
 
 def transcribeDIR(DIR):
 	# Walk through all files in DIR including in subdirectories
@@ -67,8 +70,6 @@ def transcribeDIR(DIR):
 
 if __name__ == '__main__':
 	filepath = getFile()
-	print("Destination  = {}".format(destDIR))
-
 	if os.path.isdir(filepath):
 		destDIR = filepath
 		transcribeDIR(filepath)
